@@ -1,0 +1,24 @@
+<h1>Hello World</h1>
+<%= link_to 'Create a Bookshelf', new_bookshelf_path %>
+<%= link_to 'See my Bookshelves', bookshelves_path %>
+
+<% @books.each do |book| %>
+  <p>
+    <%= book["volumeInfo"]["title"] %>
+  </p>
+  <p>
+    <%= book['id'] %>
+  </p>
+  <%= link_to "Voir plus d'information", page_path(book['id']) %>
+
+  <%= simple_form_for add_book_path do |f| %>
+    <%= f.input :bookshelf, collection: @bookshelves %>
+    <%= f.button :submit %>
+  <% end %>
+
+  <% if book["volumeInfo"]["imageLinks"].nil? %>
+    <img src="https://via.placeholder.com/150" alt="">
+  <% else %>
+    <img src="<%= book["volumeInfo"]["imageLinks"]["thumbnail"] %>" alt="toto">
+  <% end %>
+<% end %>

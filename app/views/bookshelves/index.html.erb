@@ -1,0 +1,12 @@
+<h1>Bookshelfs#index</h1>
+<p>Find me in app/views/bookshelfs/index.html.erb</p>
+
+<% @bookshelves.each do |bookshelf| %>
+  <div>
+    <%= link_to bookshelf_path(bookshelf) do %>
+      <p>
+        <%= bookshelf.name %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
