@@ -1,1 +1,17 @@
 <h1><%= @bookshelf.name %></h1>
+
+<% @books.each do |book| %>
+  <h3>
+    <%= book.title %>
+  </h3>
+  <p>
+    <%= book.description %>
+  </p>
+
+  <% if book.image_url.nil? %>
+    <img src="https://via.placeholder.com/150" alt="">
+  <% else %>
+    <img src="<%= book.image_url %>" alt="toto">
+  <% end %>
+  <%= link_to "Voir plus d'information", book_path(book) %>
+<% end %>

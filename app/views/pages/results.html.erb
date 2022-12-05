@@ -1,11 +1,4 @@
-<h1 class="text-3xl font-bold underline text-blue">Hello World</h1>
-<%= link_to 'Create a Bookshelf', new_bookshelf_path %>
-<%= link_to 'See my Bookshelves', bookshelves_path %>
-
-<%= simple_form_for :search, url: '/search' do |f| %>
-  <%= f.input :search %>
-  <%= f.button :submit, 'Search' %>
-<% end %>
+<h1>Résults</h1>
 
 <% @books.each do |book| %>
   <h3>

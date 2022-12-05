@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_142707) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_162638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_142707) do
     t.string "google_book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "author"
+    t.text "description"
+    t.string "publisher"
+    t.date "published_date"
+    t.integer "page_count"
+    t.string "categories"
+    t.text "image_url"
   end
 
   create_table "bookshelves", force: :cascade do |t|

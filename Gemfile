@@ -88,3 +88,5 @@ gem "nokogiri", "~> 1.13"
 gem "rest-client", "~> 2.1"
 
 gem "simple_form", "~> 5.1"
+
+gem "tailwindcss-rails", "~> 2.0"

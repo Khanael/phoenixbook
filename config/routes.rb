@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   root "pages#home"
-  resources :pages, only: %i[show]
-  resources :bookshelves do
+  get :results, to: "pages#results"
+  post :search, to: "pages#search"
+
+  resources :bookshelves
+  resources :books, only: %i[show] do
     resources :book_bookshelves, only: %i[create destroy]
   end
-  post 'add_book', to: 'bookshelves#add_book_to_bookshelf'
 end

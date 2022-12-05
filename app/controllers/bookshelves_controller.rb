@@ -24,7 +24,7 @@ class BookshelvesController < ApplicationController
     @bookshelf = Bookshelf.find(params[:id])
     # @books = Book.where(id == @bookshelf.id)
 
-    @books = Book.where( @bookshelf.id)
+    @books = @bookshelf.books
   end
 
   def index
