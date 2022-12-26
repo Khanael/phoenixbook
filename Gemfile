@@ -77,8 +77,6 @@ gem "sib-api-v3-sdk"
 
 gem "htmlbeautifier"
 
-gem "erb-formatter"
-
 gem "rufo"
 
 gem "devise", "~> 4.8"
@@ -90,3 +88,10 @@ gem "rest-client", "~> 2.1"
 gem "simple_form", "~> 5.1"
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "erb-formatter", "~> 0.3.0"
+
+gem "recommendable", "~> 2.2"
+
+gem "sidekiq", "~> 7.0"
+gem "sidekiq-failures", "~> 1.0"

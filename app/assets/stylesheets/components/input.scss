@@ -1,0 +1,8 @@
+.search {
+  border-radius: 10px 0 0 10px;
+  border: 1px solid #dcdcdc;
+
+  &::placeholder {
+    color: $primary-color;
+  }
+}

@@ -1,0 +1,25 @@
+.cards {
+  max-width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  grid-auto-rows: minmax(100px, auto);
+
+  .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 16px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+
+    .truncate {
+      display: -webkit-box;
+      max-width: 200px;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
