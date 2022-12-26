@@ -1,0 +1,7 @@
+<h1>Recommendations</h1>
+
+<% @recommendations.each do |recommendation| %>
+  <div class="recommendation">
+    <h2><%= recommendation.title %></h2>
+    <p><%= recommendation.description %></p>
+  </div>

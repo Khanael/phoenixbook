@@ -91,7 +91,8 @@ gem "tailwindcss-rails", "~> 2.0"
 
 gem "erb-formatter", "~> 0.3.0"
 
-gem "recommendable", "~> 2.2"
 
 gem "sidekiq", "~> 7.0"
 gem "sidekiq-failures", "~> 1.0"
+
+gem "simple_recommender", "~> 0.0.3"

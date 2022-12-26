@@ -1,6 +1,11 @@
 class Book < ApplicationRecord
   has_many :book_bookshelf
   has_many :bookshelves, through: :book_bookshelf
+  has_many :likes
+  has_many :users, through: :likes
 
   validates :google_book_id, presence: true, uniqueness: true
+
+  include SimpleRecommender::Recommendable
+  similar_by :users
 end

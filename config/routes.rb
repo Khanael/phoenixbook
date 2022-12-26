@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get :results, to: "pages#results"
   post :search, to: "pages#search"
 
+  get :recommendations, to: 'pages#recommendations'
+
   resources :bookshelves
   resources :books, only: %i[show] do
     resources :book_bookshelves, only: %i[create destroy]

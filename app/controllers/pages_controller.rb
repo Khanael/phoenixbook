@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home show search results]
 
   def home
-    @books = Book.all.shuffle.first(10)
+    @books = Book.all.sample(10)
     @book_bookshelf = BookBookshelf.new
 
     @bookshelves = Bookshelf.all
@@ -20,6 +20,10 @@ class PagesController < ApplicationController
     @bookshelves = Bookshelf.all
     responses = api_request(params[:search])
     build_books(responses)
+  end
+
+  def recommendations
+    @recommendations = Book.first.similar_items(n_results: 3)
   end
 
   private
