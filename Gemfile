@@ -95,4 +95,4 @@ gem "erb-formatter", "~> 0.3.0"
 gem "sidekiq", "~> 7.0"
 gem "sidekiq-failures", "~> 1.0"
 
-gem "simple_recommender", "~> 0.0.3"
+gem "disco", "~> 0.3.2"

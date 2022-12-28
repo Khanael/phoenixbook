@@ -23,7 +23,7 @@ class PagesController < ApplicationController
   end
 
   def recommendations
-    @recommendations = Book.first.similar_items(n_results: 3)
+    @recommendations = Book.first(5)
   end
 
   private
