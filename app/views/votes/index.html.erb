@@ -1,0 +1,10 @@
+<h1>Votes index</h1>
+
+<% @votes.each do |vote| %>
+  <div class="vote">
+    <div>
+      <h2><%= vote.book.title %></h2>
+      <p><%= vote.book.description %></p>
+    </div>
+  </div>
+<% end %>

@@ -8,12 +8,15 @@ Rails.application.routes.draw do
 
   get :recommendations, to: 'pages#recommendations'
 
-
-
   resources :bookshelves
   resources :books, only: %i[show] do
     resources :book_bookshelves, only: %i[create destroy]
-    resources :likes, only: %i[create]
+    resources :votes, only: %i[create]
   end
-  resources :likes, only: %i[update destroy]
+  resources :votes, only: %i[index update destroy] do
+    member do
+      get :like
+      get :dislike
+    end
+  end
 end

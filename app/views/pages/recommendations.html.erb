@@ -2,7 +2,13 @@
 
 <% @recommendations.each do |recommendation| %>
   <div class="recommendation">
-    <h2><%= recommendation.title %></h2>
-    <p><%= recommendation.description %></p>
+    <div>
+      <h2><%= recommendation.title %></h2>
+      <p><%= recommendation.description %></p>
+    </div>
+    <div>
+      <%= link_to 'Like', book_votes_path(recommendation,liked: true), data: { turbo_method: :post } %>
+      <%= link_to 'Dislike', book_votes_path(recommendation, liked: false), data: { turbo_method: :post } %>
+    </div>
   </div>
 <% end %>

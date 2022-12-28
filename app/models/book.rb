@@ -6,6 +6,5 @@ class Book < ApplicationRecord
 
   validates :google_book_id, presence: true, uniqueness: true
 
-  include SimpleRecommender::Recommendable
-  similar_by :users
+
 end
