@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_181336) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_28_144143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "intarray"
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_181336) do
     t.integer "page_count"
     t.string "categories"
     t.text "image_url"
+    t.float "average_rating"
   end
 
   create_table "bookshelves", force: :cascade do |t|

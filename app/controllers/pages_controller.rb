@@ -60,6 +60,7 @@ class PagesController < ApplicationController
         book.page_count = response["volumeInfo"]["pageCount"].to_i
         book.categories = response["volumeInfo"]["categories"].join(", ") if response["volumeInfo"]["categories"]
         book.image_url = response["volumeInfo"]["imageLinks"]["thumbnail"] if book.image_url = response["volumeInfo"]["imageLinks"]
+        book.average_rating = response["volumeInfo"]["averageRating"].to_f
 
         @books << book if book.save! # save the book if it is valid and add it to the array of books to be displayed
       else
