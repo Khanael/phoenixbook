@@ -1,5 +1,4 @@
 class BookshelvesController < ApplicationController
-  skip_before_action :authenticate_user!
 
   def new
     @bookshelf = Bookshelf.new
@@ -29,7 +28,6 @@ class BookshelvesController < ApplicationController
 
   def index
     @bookshelves = Bookshelf.all
-    render json: @bookshelves
   end
 
   private

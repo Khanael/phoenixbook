@@ -8,7 +8,6 @@ class PagesController < ApplicationController
     @book_bookshelf = BookBookshelf.new # instance of BookBookshelf to be used in the view
 
     @bookshelves = Bookshelf.all # array of bookshelves to be displayed in the view
-    render json: @books # render the books as JSON
   end
 
   def search
