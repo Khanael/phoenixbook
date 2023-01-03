@@ -7,6 +7,7 @@ class BookshelvesController < ApplicationController
 
   def create
     @bookshelf = Bookshelf.create(bookshelf_params)
+
     redirect_to bookshelves_path
   end
 
@@ -14,6 +15,12 @@ class BookshelvesController < ApplicationController
   end
 
   def update
+    @book_bookshelves = Bookshelf.find(params[:id]).book_bookshelf
+
+    params[:positions].each do |position, index|
+      @book_bookshelves.find(position['bookbookshelf_id']).update!(position: (index + 1))
+    end
+    render json: { message: "success" }
   end
 
   def destroy
@@ -21,9 +28,8 @@ class BookshelvesController < ApplicationController
 
   def show
     @bookshelf = Bookshelf.find(params[:id])
-    # @books = Book.where(id == @bookshelf.id)
-
-    @books = @bookshelf.books
+    # order books by the position attribute in book_bookshelves
+    @books = @bookshelf.book_bookshelf.order(:position).map(&:book)
   end
 
   def index

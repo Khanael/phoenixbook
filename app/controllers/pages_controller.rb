@@ -1,4 +1,4 @@
-require "json"
+require 'json'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home show search results]

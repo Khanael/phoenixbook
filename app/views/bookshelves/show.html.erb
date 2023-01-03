@@ -1,17 +1,40 @@
 <h1><%= @bookshelf.name %></h1>
 
-<% @books.each do |book| %>
-  <h3>
-    <%= book.title %>
-  </h3>
-  <p>
-    <%= book.description %>
-  </p>
+<% if @bookshelf.books.empty? %>
+  <p>Il n'y a pas de livre dans cette étagère</p>
+<% else %>
+  <p>Il y a
+    <%= @bookshelf.books.count %>
+    livres dans cette étagère</p>
+  <div
+    data-controller="sortablejs"
+    data-sortablejs-target="list"
+    data-bookshelf-id='<%= @bookshelf.id %>'
+  >
+    <% @books.each_with_index do |book, index| %>
+      <div
+        data-sortablejs-target="book"
+        data-bookbookshelf-id='<%= @bookshelf.book_bookshelf[index].id %>'
+      >
+        <h3>
+          <span data-sortablejs-target='position'>
+            <%= @bookshelf.book_bookshelf[index].position %>
+          </span>
+          -
+          <%= book.title %>
+        </h3>
+        <p>
+          <%= book.description %>
+        </p>
 
-  <% if book.image_url.nil? %>
-    <img src="https://via.placeholder.com/150" alt="">
-  <% else %>
-    <img src="<%= book.image_url %>" alt="toto">
-  <% end %>
-  <%= link_to "Voir plus d'information", book_path(book) %>
+        <% if book.image_url.nil? %>
+          <img src="https://via.placeholder.com/150" alt="">
+        <% else %>
+          <img src="<%= book.image_url %>" alt="toto">
+        <% end %>
+        <%= link_to "Voir plus d'information", book_path(book) %>
+        <%= link_to 'Supprimer le livre', book_bookshelf_path(@bookshelf.book_bookshelf[index]), data: {turbo_method: :delete} %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

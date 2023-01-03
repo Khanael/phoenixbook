@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@vitejs/plugin-vue": "^4.0.0",
+    "sortablejs": "^1.15.0",
     "vue": "^3.2.45",
     "vue-cli": "^2.9.6",
     "webpack": "^5.74.0",
