@@ -1,5 +1,5 @@
 class Bookshelf < ApplicationRecord
-  has_many :book_bookshelf
+  has_many :book_bookshelf, -> { order(position: :asc) }, dependent: :destroy
   has_many :books, through: :book_bookshelf
 
   validates :name, presence: true

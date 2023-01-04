@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     @recommendations = recommender.item_recs("Harry Potter") # get recommendations for "Harry Potter"
     if @recommendations.empty?
       # select random books that the user don't have a vote on if no recommendations are found
-      @recommendations = Book.where.not(id: current_user.votes.pluck(:book_id)).sample(10)
+      @recommendations = Book.where.not(id: current_user.votes.pluck(:book_id)).sample(4)
     end
   end
 

@@ -14,22 +14,12 @@ class BookshelvesController < ApplicationController
   def edit
   end
 
-  def update
-    @book_bookshelves = Bookshelf.find(params[:id]).book_bookshelf
-
-    params[:positions].each do |position, index|
-      @book_bookshelves.find(position['bookbookshelf_id']).update!(position: (index + 1))
-    end
-    render json: { message: "success" }
-  end
-
   def destroy
   end
 
   def show
     @bookshelf = Bookshelf.find(params[:id])
-    # order books by the position attribute in book_bookshelves
-    @books = @bookshelf.book_bookshelf.order(:position).map(&:book)
+    @bookbookshelves = BookBookshelf.where(bookshelf_id: @bookshelf.id).order(:position)
   end
 
   def index

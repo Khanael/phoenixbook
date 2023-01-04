@@ -1,38 +1,27 @@
 <h1><%= @bookshelf.name %></h1>
 
-<% if @bookshelf.books.empty? %>
+<% if @bookshelf.book_bookshelf.empty? %>
   <p>Il n'y a pas de livre dans cette étagère</p>
 <% else %>
   <p>Il y a
-    <%= @bookshelf.books.count %>
+    <%= @bookshelf.book_bookshelf.count %>
     livres dans cette étagère</p>
-  <div
-    data-controller="sortablejs"
-    data-sortablejs-target="list"
-    data-bookshelf-id='<%= @bookshelf.id %>'
-  >
-    <% @books.each_with_index do |book, index| %>
-      <div
-        data-sortablejs-target="book"
-        data-bookbookshelf-id='<%= @bookshelf.book_bookshelf[index].id %>'
-      >
+  <div data-controller="sortablejs" data-bookshelf-id='<%= @bookshelf.id %>'>
+    <% @bookbookshelves.each_with_index do |book_bookshelf, index| %>
+      <div data-id='<%= book_bookshelf.id %>'>
         <h3>
-          <span data-sortablejs-target='position'>
-            <%= @bookshelf.book_bookshelf[index].position %>
-          </span>
-          -
-          <%= book.title %>
+          <%= book_bookshelf.book.title %>
         </h3>
         <p>
-          <%= book.description %>
+          <%= book_bookshelf.book.description %>
         </p>
 
-        <% if book.image_url.nil? %>
+        <% if book_bookshelf.book.image_url.nil? %>
           <img src="https://via.placeholder.com/150" alt="">
         <% else %>
-          <img src="<%= book.image_url %>" alt="toto">
+          <img src="<%= book_bookshelf.book.image_url %>" alt="toto">
         <% end %>
-        <%= link_to "Voir plus d'information", book_path(book) %>
+        <%= link_to "Voir plus d'information", book_path(book_bookshelf.book) %>
         <%= link_to 'Supprimer le livre', book_bookshelf_path(@bookshelf.book_bookshelf[index]), data: {turbo_method: :delete} %>
       </div>
     <% end %>

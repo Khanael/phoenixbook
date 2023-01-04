@@ -1,7 +1,11 @@
 <h1>Recommendations</h1>
 
 <% @recommendations.each do |recommendation| %>
-  <div class="recommendation">
+  <div
+    class="recommendation"
+    data-controller="swipe"
+    data-action="touchstart->swipe#touch"
+  >
     <div>
       <h2><%= recommendation.title %></h2>
       <p><%= recommendation.description %></p>

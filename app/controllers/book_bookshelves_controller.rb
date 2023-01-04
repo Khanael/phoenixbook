@@ -19,6 +19,13 @@ class BookBookshelvesController < ApplicationController
     end
   end
 
+  def update
+    @book_bookshelf = BookBookshelf.find(params[:book_bookshelf_id])
+    @book_bookshelf.insert_at(params[:position].to_i)
+
+    render json: { message: "success" }
+  end
+
   def destroy
     @book_bookshelf = BookBookshelf.find(params[:id])
     @book_bookshelf.destroy
