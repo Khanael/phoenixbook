@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_03_162413) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_221928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "intarray"
   enable_extension "plpgsql"
@@ -44,6 +44,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_162413) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_bookshelves_on_user_id"
+  end
+
+  create_table "disco_recommendations", force: :cascade do |t|
+    t.string "subject_type"
+    t.bigint "subject_id"
+    t.string "item_type"
+    t.bigint "item_id"
+    t.string "context"
+    t.float "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_disco_recommendations_on_item"
+    t.index ["subject_type", "subject_id"], name: "index_disco_recommendations_on_subject"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_162413) do
 
   add_foreign_key "book_bookshelves", "books"
   add_foreign_key "book_bookshelves", "bookshelves"
+  add_foreign_key "bookshelves", "users"
   add_foreign_key "votes", "books"
   add_foreign_key "votes", "users"
 end

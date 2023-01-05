@@ -1,19 +1,22 @@
 <h1>Recommendations</h1>
+<p>Swipe à droite pour Dislike un livre et à gauche pour Like</p>
 
-<% @recommendations.each do |recommendation| %>
-  <div
-    class="recommendation"
-    data-controller="swipe"
-    data-action="touchstart->swipe#touch"
-  >
-    <div>
-      <h2><%= recommendation.title %></h2>
-      <p><%= recommendation.description %></p>
-      <p><%= recommendation.average_rating ? recommendation.average_rating : 0 %></p>
+<div>
+  <% @recommendations.each do |recommendation| %>
+    <div
+      class="recommendation"
+      data-controller="swipe"
+      data-id="<%= recommendation.id %>"
+    >
+      <div>
+        <h2><%= recommendation.title %></h2>
+        <p><%= recommendation.description %></p>
+        <p><%= recommendation.average_rating ? recommendation.average_rating : 0 %></p>
+      </div>
+      <div>
+        <%= link_to 'Like', book_votes_path(recommendation,liked: true), data: { turbo_method: :post } %>
+        <%= link_to 'Dislike', book_votes_path(recommendation, liked: false), data: { turbo_method: :post } %>
+      </div>
     </div>
-    <div>
-      <%= link_to 'Like', book_votes_path(recommendation,liked: true), data: { turbo_method: :post } %>
-      <%= link_to 'Dislike', book_votes_path(recommendation, liked: false), data: { turbo_method: :post } %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

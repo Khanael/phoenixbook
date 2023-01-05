@@ -1,19 +1,53 @@
 import { Controller } from '@hotwired/stimulus'
+import Hammer from 'hammerjs'
 
 // Connects to data-controller="swipe"
 export default class extends Controller {
-  connect() {}
+  connect() {
+    var hammertime = new Hammer(this.element)
+    console.log(this.element.dataset.id)
+    const id = this.element.dataset.id
 
-  touch() {
-    let touchstartX = 0
-    let touchendX = 0
-    touchstartX = e.changedTouches[0].screenX
-    touchendX = e.changedTouches[0].screenX
-    checkDirection()
-  }
+    hammertime.on('swipeleft', function (ev) {
+      console.log(ev)
+      if (ev.direction == 2) {
+        console.log('swipe left')
+        fetch(`/books/${id}/votes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
+              .content,
+          },
+          body: JSON.stringify({ liked: 'true' }),
+        }).then((response) => {
+          if (response.ok) {
+            console.log('success')
+            window.location.reload()
+          }
+        })
+      }
+    })
 
-  checkDirection() {
-    if (touchendX < touchstartX) console.log('swiped left!')
-    if (touchendX > touchstartX) console.log('swiped right!')
+    hammertime.on('swiperight', function (ev) {
+      if (ev.direction == 4) {
+        console.log('swipe right')
+
+        fetch(`/books/${id}/votes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
+              .content,
+          },
+          body: JSON.stringify({ liked: 'false' }),
+        }).then((response) => {
+          if (response.ok) {
+            console.log('success')
+            window.location.reload()
+          }
+        })
+      }
+    })
   }
 }

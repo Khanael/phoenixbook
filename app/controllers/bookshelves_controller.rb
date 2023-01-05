@@ -6,7 +6,9 @@ class BookshelvesController < ApplicationController
   end
 
   def create
-    @bookshelf = Bookshelf.create(bookshelf_params)
+    @bookshelf = Bookshelf.new(bookshelf_params)
+    @bookshelf.user = current_user
+    @bookshelf.save!
 
     redirect_to bookshelves_path
   end
@@ -23,7 +25,7 @@ class BookshelvesController < ApplicationController
   end
 
   def index
-    @bookshelves = Bookshelf.all
+    @bookshelves = Bookshelf.where(user_id: current_user.id)
   end
 
   private

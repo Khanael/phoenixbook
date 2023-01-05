@@ -14,9 +14,13 @@
     <img src="<%= book.image_url %>" alt="toto">
   <% end %>
 
-  <%= simple_form_for [book, @book_bookshelf] do |f| %>
-    <%= f.input :bookshelf_id, collection: @bookshelves %>
-    <%= f.submit "Add to Bookshelf" %>
+  <% if current_user && @bookshelves.count > 0 %>
+    <div>
+      <%= simple_form_for [book, @book_bookshelf] do |f| %>
+        <%= f.input :bookshelf_id, collection: @bookshelves, label: 'Ajouter à une étagère' %>
+        <%= f.submit "Add to Bookshelf" %>
+      <% end %>
+    </div>
   <% end %>
 
   <%= link_to "Voir plus d'information", book_path(book) %>

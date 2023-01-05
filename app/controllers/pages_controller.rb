@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     @books = Book.all.sample(10) # array of books to be displayed
     @book_bookshelf = BookBookshelf.new # instance of BookBookshelf to be used in the view
 
-    @bookshelves = Bookshelf.all # array of bookshelves to be displayed in the view
+    @bookshelves = Bookshelf.where(user_id: current_user) # array of bookshelves to be displayed in the view
   end
 
   def search
@@ -17,19 +17,22 @@ class PagesController < ApplicationController
   def results
     @books = [] # array of books to be displayed
     @book_bookshelf = BookBookshelf.new # instance of BookBookshelf to be used in the view
-    @bookshelves = Bookshelf.all # array of bookshelves to be displayed in the view
+    @bookshelves = Bookshelf.where(user_id: current_user) # array of bookshelves to be displayed in the view
     responses = api_request(params[:search]) # array of responses from the Google Books API
     build_books(responses) # build books from the responses
   end
 
   def recommendations
-    data = Disco.load_movielens # load data from database
+    bookbookshelves = BookBookshelf.all # load data from database
+    data = bookbookshelves.map { |bookbookshelf| {user_id: bookbookshelf.bookshelf.user_id.to_s, item_id: bookbookshelf.book_id.to_s, rating: 5} }
     recommender = Disco::Recommender.new(factors: 20) # initialize recommender
     recommender.fit(data) # fit data to recommender
-    @recommendations = recommender.item_recs("Harry Potter") # get recommendations for "Harry Potter"
+
+    @recommendations = recommender.item_recs(current_user.id) # get recommendations from recommender for the current user
+
     if @recommendations.empty?
       # select random books that the user don't have a vote on if no recommendations are found
-      @recommendations = Book.where.not(id: current_user.votes.pluck(:book_id)).sample(4)
+      @recommendations = Book.where.not(id: current_user.votes.pluck(:book_id)).sample(1)
     end
   end
 

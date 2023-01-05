@@ -9,7 +9,7 @@
   <% end %>
 </div>
 
-<h2>Voici une sélection de livres</h2>
+<h2 class="my-5">Voici une sélection de livres</h2>
 <div class="cards">
   <% @books.each do |book| %>
 
@@ -25,25 +25,19 @@
             <%= book.title %>
           </h3>
         <% end %>
-        <p class='truncate'>
-          <%= book.description %>
-        </p>
         <span class="category">
           <%= book.categories %>
         </span>
-        <%= simple_form_for [book, @book_bookshelf] do |f| %>
-          <%= f.input :bookshelf_id, collection: @bookshelves, label: 'Ajouter à une étagère' %>
-          <%= f.submit "Add to Bookshelf" %>
+        <% if current_user && @bookshelves.count > 0 %>
+          <div>
+            <%= simple_form_for [book, @book_bookshelf] do |f| %>
+              <%= f.input :bookshelf_id, collection: @bookshelves, label: 'Ajouter à une étagère' %>
+              <%= f.submit "Add to Bookshelf" %>
+            <% end %>
+          </div>
         <% end %>
 
       </div>
     </div>
   <% end %>
-</div>
-
-<h1>This is h1 title</h1>
-
-<div id="app">
-  <p>{{ course }}</p>
-  <button-counter></button-counter>
 </div>
