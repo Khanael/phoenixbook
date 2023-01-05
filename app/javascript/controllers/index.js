@@ -6,3 +6,9 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import SortablejsController from "./sortablejs_controller"
+application.register("sortablejs", SortablejsController)
+
+import SwipeController from "./swipe_controller"
+application.register("swipe", SwipeController)

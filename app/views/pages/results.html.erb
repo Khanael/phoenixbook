@@ -1,23 +1,31 @@
-<h1>Résults</h1>
+<h1>Le résultat de votre recherche</h1>
 
-<% @books.each do |book| %>
-  <h3>
-    <%= book.title %>
-  </h3>
-  <p>
-    <%= book.google_book_id %>
-  </p>
-
-  <% if book.image_url.nil? %>
-    <img src="https://via.placeholder.com/150" alt="">
-  <% else %>
-    <img src="<%= book.image_url %>" alt="toto">
-  <% end %>
-
-  <%= simple_form_for [book, @book_bookshelf] do |f| %>
-    <%= f.input :bookshelf_id, collection: @bookshelves %>
-    <%= f.submit "Add to Bookshelf" %>
-  <% end %>
-
-  <%= link_to "Voir plus d'information", book_path(book) %>
+<% if @books.empty? %>
+  <p>Il n'y a pas de livre dans cette étagère</p>
+<% else %>
+  <p>Il y a
+    <%= @books.count %>
+    résultats</p>
+  <div class='my-5 bookshelf-content'>
+    <% @books.each do |book| %>
+      <div class='card my-5'>
+        <% if book.image_url.nil? %>
+          <img src="https://via.placeholder.com/150" alt="">
+        <% else %>
+          <img src="<%= book.image_url %>" alt="toto">
+        <% end %>
+        <div class="max-w-xl">
+          <h3>
+            <%= book.title %>
+          </h3>
+          <p>
+            <%= book.description %>
+          </p>
+        </div>
+        <div class="links">
+          <%= link_to "Voir plus d'information", book_path(book), class: 'button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

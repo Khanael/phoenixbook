@@ -1,12 +1,19 @@
-<h1>Bookshelfs#index</h1>
-<p>Find me in app/views/bookshelfs/index.html.erb</p>
+<h1>Mes Étagères</h1>
 
-<% @bookshelves.each do |bookshelf| %>
-  <div>
-    <%= link_to bookshelf_path(bookshelf) do %>
-      <p>
-        <%= bookshelf.name %>
-      </p>
+<%= link_to 'Créer une étagère', new_bookshelf_path, class: 'button' %>
+
+<div class="bookshelves my-5">
+  <% if @bookshelves.count > 0 %>
+    <% @bookshelves.each do |bookshelf| %>
+      <div class='bookshelf my-5'>
+        <h2>
+          <%= bookshelf.name %>
+        </h2>
+        <div>
+          <%= link_to 'Voir la liste', bookshelf_path(bookshelf), class: 'button' %>
+          <%= link_to 'Supprimer', bookshelf_path(bookshelf), data: {turbo_method: :delete , turbo_confirm: 'Are you sure?' }, class: 'button' %>
+        </div>
+      </div>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

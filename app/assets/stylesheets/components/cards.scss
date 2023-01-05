@@ -1,0 +1,38 @@
+.cards {
+  max-width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  grid-auto-rows: minmax(100px, auto);
+
+  .category {
+    color: $primary-color;
+  }
+}
+
+.bookshelf-content {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 16px;
+  border: 1px solid $grey-color;
+  border-radius: 10px;
+
+  h3:hover {
+    color: $primary-color;
+  }
+
+  .links {
+    display: flex;
+    column-gap: 16px;
+    a:hover {
+      color: $primary-color;
+    }
+  }
+}

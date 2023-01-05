@@ -1,5 +1,4 @@
 class BookshelvesController < ApplicationController
-  skip_before_action :authenticate_user!
 
   def new
     @bookshelf = Bookshelf.new
@@ -7,28 +6,29 @@ class BookshelvesController < ApplicationController
   end
 
   def create
-    @bookshelf = Bookshelf.create(bookshelf_params)
+    @bookshelf = Bookshelf.new(bookshelf_params)
+    @bookshelf.user = current_user
+    @bookshelf.save!
+
     redirect_to bookshelves_path
   end
 
   def edit
   end
 
-  def update
-  end
-
   def destroy
+    @bookshelf = Bookshelf.find(params[:id])
+    @bookshelf.destroy
+    redirect_to bookshelves_path
   end
 
   def show
     @bookshelf = Bookshelf.find(params[:id])
-    # @books = Book.where(id == @bookshelf.id)
-
-    @books = @bookshelf.books
+    @bookbookshelves = BookBookshelf.where(bookshelf_id: @bookshelf.id).order(:position)
   end
 
   def index
-    @bookshelves = Bookshelf.all
+    @bookshelves = Bookshelf.where(user_id: current_user.id)
   end
 
   private

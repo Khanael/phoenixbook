@@ -4,6 +4,13 @@ class BookBookshelvesController < ApplicationController
   def create
     @book_bookshelf = BookBookshelf.new(book_bookshelf_params)
     @book_bookshelf.book_id = params[:book_id]
+    @bookshelf = Bookshelf.find(book_bookshelf_params[:bookshelf_id])
+
+    if params[:position]
+      @book_bookshelf.position = params[:position]
+    else
+      @book_bookshelf.position = @bookshelf.books.count + 1
+    end
 
     if @book_bookshelf.save!
       redirect_to bookshelf_path(@book_bookshelf.bookshelf)
@@ -12,10 +19,17 @@ class BookBookshelvesController < ApplicationController
     end
   end
 
-  def delete
+  def update
+    @book_bookshelf = BookBookshelf.find(params[:book_bookshelf_id])
+    @book_bookshelf.insert_at(params[:position].to_i)
+
+    render json: { message: "success" }
+  end
+
+  def destroy
     @book_bookshelf = BookBookshelf.find(params[:id])
     @book_bookshelf.destroy
-    redirect_to bookshelves_path
+    redirect_to bookshelves_path(@book_bookshelf.bookshelf)
   end
 
   private

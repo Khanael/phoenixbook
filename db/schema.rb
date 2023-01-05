@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_24_162638) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_221928) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "intarray"
   enable_extension "plpgsql"
 
   create_table "book_bookshelves", force: :cascade do |t|
@@ -19,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_162638) do
     t.bigint "bookshelf_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["book_id"], name: "index_book_bookshelves_on_book_id"
     t.index ["bookshelf_id"], name: "index_book_bookshelves_on_bookshelf_id"
   end
@@ -35,12 +37,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_162638) do
     t.integer "page_count"
     t.string "categories"
     t.text "image_url"
+    t.float "average_rating"
   end
 
   create_table "bookshelves", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_bookshelves_on_user_id"
+  end
+
+  create_table "disco_recommendations", force: :cascade do |t|
+    t.string "subject_type"
+    t.bigint "subject_id"
+    t.string "item_type"
+    t.bigint "item_id"
+    t.string "context"
+    t.float "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_disco_recommendations_on_item"
+    t.index ["subject_type", "subject_id"], name: "index_disco_recommendations_on_subject"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +73,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_162638) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "liked"
+    t.index ["book_id"], name: "index_votes_on_book_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "book_bookshelves", "books"
   add_foreign_key "book_bookshelves", "bookshelves"
+  add_foreign_key "bookshelves", "users"
+  add_foreign_key "votes", "books"
+  add_foreign_key "votes", "users"
 end
