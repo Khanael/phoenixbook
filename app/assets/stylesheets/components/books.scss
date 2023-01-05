@@ -1,0 +1,35 @@
+.book {
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.book-info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 16px;
+  .bold {
+    font-weight: bold;
+  }
+}
+
+.likes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 16px;
+
+  a {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 8px;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

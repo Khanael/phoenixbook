@@ -6,23 +6,30 @@
   <p>Il y a
     <%= @bookshelf.book_bookshelf.count %>
     livres dans cette étagère</p>
-  <div data-controller="sortablejs" data-bookshelf-id='<%= @bookshelf.id %>'>
+  <div
+    class='my-5 bookshelf-content'
+    data-controller="sortablejs"
+    data-bookshelf-id='<%= @bookshelf.id %>'
+  >
     <% @bookbookshelves.each_with_index do |book_bookshelf, index| %>
-      <div data-id='<%= book_bookshelf.id %>'>
-        <h3>
-          <%= book_bookshelf.book.title %>
-        </h3>
-        <p>
-          <%= book_bookshelf.book.description %>
-        </p>
-
+      <div class='card my-5' data-id='<%= book_bookshelf.id %>'>
         <% if book_bookshelf.book.image_url.nil? %>
           <img src="https://via.placeholder.com/150" alt="">
         <% else %>
           <img src="<%= book_bookshelf.book.image_url %>" alt="toto">
         <% end %>
-        <%= link_to "Voir plus d'information", book_path(book_bookshelf.book) %>
-        <%= link_to 'Supprimer le livre', book_bookshelf_path(@bookshelf.book_bookshelf[index]), data: {turbo_method: :delete} %>
+        <div class="max-w-xl">
+          <h3>
+            <%= book_bookshelf.book.title %>
+          </h3>
+          <p>
+            <%= book_bookshelf.book.description %>
+          </p>
+        </div>
+        <div class="links">
+          <%= link_to "Voir plus d'information", book_path(book_bookshelf.book), class: 'button' %>
+          <%= link_to 'Supprimer le livre', book_bookshelf_path(@bookshelf.book_bookshelf[index]), data: {turbo_method: :delete}, class: 'button' %>
+        </div>
       </div>
     <% end %>
   </div>

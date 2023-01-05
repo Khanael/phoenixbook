@@ -1,7 +1,6 @@
-<h1>Bookshelfs#new</h1>
-<p>Find me in app/views/bookshelfs/new.html.erb</p>
+<h1>Crée une étagère</h1>
 
 <%= simple_form_for @bookshelf do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
+  <%= f.input :name, label: 'Nom', wrapper_html: {class: 'my-5'} %>
+  <%= f.button :submit,'Créer votre étagère', class: 'button' %>
 <% end %>

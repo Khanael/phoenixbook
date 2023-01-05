@@ -1,0 +1,15 @@
+.bookshelves {
+  max-width: 80%;
+  margin: 50px auto;
+
+  .bookshelf {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 16px;
+    border: 1px solid $grey-color;
+    border-radius: 10px;
+    height: 80px;
+    padding: 8px 16px;
+  }
+}

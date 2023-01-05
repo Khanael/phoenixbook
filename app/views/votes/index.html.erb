@@ -1,11 +1,32 @@
-<h1>Votes index</h1>
+<h1>Tous les livres que vous avez aimé</h1>
 
-<% @votes.each do |vote| %>
-  <div class="vote">
-    <div>
-      <h2><%= vote.book.title %></h2>
-      <p><%= vote.book.description %></p>
-      <p><%= vote.book.average_rating %></p>
-    </div>
+<% if @votes.empty? %>
+  <p>Vous n'avez pas encore aimé de livre</p>
+<% else %>
+  <p>Il y a
+    <%= @votes.count %>
+    livres dans cette étagère</p>
+  <div class='my-5 bookshelf-content'>
+    <% @votes.each do |vote| %>
+      <div class='card my-5'>
+        <% if vote.book.image_url.nil? %>
+          <img src="https://via.placeholder.com/150" alt="">
+        <% else %>
+          <img src="<%= vote.book.image_url %>" alt="toto">
+        <% end %>
+        <div class="max-w-xl">
+          <h3>
+            <%= vote.book.title %>
+          </h3>
+          <p>
+            <%= vote.book.description %>
+          </p>
+        </div>
+        <div class="links">
+          <%= link_to "Voir plus d'information", book_path(vote.book), class: 'button' %>
+          <%= link_to 'Supprimer le livre', vote_path(vote), data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sur ?'}, class: 'button' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>

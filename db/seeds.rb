@@ -6,6 +6,16 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+# Clean the database.
+p 'Cleaning the database...'
+BookBookshelf.destroy_all
+Bookshelf.destroy_all
+Vote.destroy_all
+Book.destroy_all
+User.destroy_all
+p 'Database cleaned.'
 
 # Create a main sample user.
-User.create!(email: "tata@tata.com", password: "tatatata")
+p 'Creating a main sample user...'
+User.create!(email: "toto@toto.com", password: "totototo")
+p 'Main sample user created.'

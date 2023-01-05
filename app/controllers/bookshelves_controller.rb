@@ -17,6 +17,9 @@ class BookshelvesController < ApplicationController
   end
 
   def destroy
+    @bookshelf = Bookshelf.find(params[:id])
+    @bookshelf.destroy
+    redirect_to bookshelves_path
   end
 
   def show
